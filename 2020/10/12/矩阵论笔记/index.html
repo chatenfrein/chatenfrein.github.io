@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Try it now.">
+  <meta name="author" content="Liao">
+  <meta name="keywords" content="">
+  
+  <title>矩阵论笔记 - Algramus</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Algramus</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/road.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="矩阵论笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-10-12 00:01" pubdate>
+        2020年10月12日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      922 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">矩阵论笔记</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：8 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="&#x7B2C;&#x4E00;&#x7AE0;"><a href="#&#x7B2C;&#x4E00;&#x7AE0;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0;"></a>&#x7B2C;&#x4E00;&#x7AE0;</h1><h1 id="&#x7B2C;&#x4E8C;&#x7AE0;"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0;"></a>&#x7B2C;&#x4E8C;&#x7AE0;</h1><h1 id="&#x7B2C;&#x4E09;&#x7AE0;"><a href="#&#x7B2C;&#x4E09;&#x7AE0;" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0;"></a>&#x7B2C;&#x4E09;&#x7AE0;</h1><h2 id="3-1-&#x7EBF;&#x6027;&#x6620;&#x5C04;&#x4E0E;&#x53D8;&#x6362;"><a href="#3-1-&#x7EBF;&#x6027;&#x6620;&#x5C04;&#x4E0E;&#x53D8;&#x6362;" class="headerlink" title="3.1 &#x7EBF;&#x6027;&#x6620;&#x5C04;&#x4E0E;&#x53D8;&#x6362;"></a>3.1 &#x7EBF;&#x6027;&#x6620;&#x5C04;&#x4E0E;&#x53D8;&#x6362;</h2><h3 id="3-1-1-&#x7EBF;&#x6027;&#x6620;&#x5C04;&#x6982;&#x5FF5;&#x4E0E;&#x6027;&#x8D28;"><a href="#3-1-1-&#x7EBF;&#x6027;&#x6620;&#x5C04;&#x6982;&#x5FF5;&#x4E0E;&#x6027;&#x8D28;" class="headerlink" title="3.1.1 &#x7EBF;&#x6027;&#x6620;&#x5C04;&#x6982;&#x5FF5;&#x4E0E;&#x6027;&#x8D28;"></a>3.1.1 &#x7EBF;&#x6027;&#x6620;&#x5C04;&#x6982;&#x5FF5;&#x4E0E;&#x6027;&#x8D28;</h3><h4 id="&#x5B9A;&#x4E49;1"><a href="#&#x5B9A;&#x4E49;1" class="headerlink" title="&#x5B9A;&#x4E49;1"></a>&#x5B9A;&#x4E49;1</h4><p>$V_1, V_2$ &#x4E3A;&#x6570;&#x57DF;$F$&#x4E0A;&#x4E24;&#x4E2A;&#x7EBF;&#x6027;&#x7A7A;&#x95F4;&#xFF0C;&#x5982;&#x679C;&#x6EE1;&#x8DB3;&#x4E86;<strong>&#x53EF;&#x52A0;&#x6027;</strong>&#x548C;<strong>&#x9F50;&#x6B21;&#x6027;</strong>&#xFF0C;&#x5BF9;&#x4E8E;$T: V_1 \rightarrow V_2$&#x65E2;&#x53EF;&#x4EE5;&#x79F0;&#x4F5C;$T$&#x662F;$V_1$&#x5230;$V_2$&#x7684;<strong>&#x7EBF;&#x6027;&#x6620;&#x5C04;</strong>&#xFF0C;&#x67D0;&#x4E9B;&#x4E66;&#x7C4D;&#x4E5F;&#x8BB0;&#x4E3A;$Hom(V_1, V_2)$&#x3002;</p>
+<h5 id="&#x5B9E;&#x4F8B;"><a href="#&#x5B9E;&#x4F8B;" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h5><ul>
+<li>$\forall x\in V, f(x) = \eta_0, f(2x) \ne 2f(x)(\eta_0 \ne \theta)$ &#x975E;&#x7EBF;&#x6027;</li>
+<li>$\forall x\in V, f(x) = x + \eta_0, f(2x) \ne 2f(x)(\eta_0 \ne \theta)$ &#x975E;&#x7EBF;&#x6027;</li>
+<li>$A\in F^{n\times n}, f: F^{n\times n}\rightarrow F^{m\times m}, \forall x\in F^{n\times n} f(x) = xA$ &#x7EBF;&#x6027;&#xFF08;&#x5E38;&#x6570;&#x77E9;&#x9635;&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x7EBF;&#x6027;&#x52A0;&#x548C;&#xFF09;</li>
+<li>$F_n[x]\rightarrow F_n[x], \forall p(x)\in F_n[x], f(p(x)) = p&#x2019;(x)$ &#x7EBF;&#x6027;</li>
+</ul>
+<h5 id="&#x8BF4;&#x660E;"><a href="#&#x8BF4;&#x660E;" class="headerlink" title="&#x8BF4;&#x660E;"></a>&#x8BF4;&#x660E;</h5><ul>
+<li>$T(V_1)$ &#x663E;&#x7136;&#x662F;$T$&#x7684;&#x503C;&#x57DF;</li>
+<li>$V_1 = V_2$ $T$ &#x6536;&#x7F29;&#x4E3A;<strong>&#x53D8;&#x6362;</strong></li>
+<li>$T<em>\theta: V_1\rightarrow V_2, \forall \alpha\in V_1, \alpha\mapsto \theta</em>{V<em>2}$ &#xFF0C;$T</em>\theta$ &#x4E3A;&#x96F6;&#x6620;&#x5C04;</li>
+<li>$T_e: V\rightarrow V, \forall\alpha \in V, \alpha\mapsto\alpha $&#xFF0C;$T_e$&#x4E3A;&#x6052;&#x7B49;&#x53D8;&#x6362;</li>
+<li>$V_1 = V_2$&#x65F6;&#xFF0C;&#x6620;&#x5C04;&#x6536;&#x7F29;&#x6210;<strong>&#x53D8;&#x6362;</strong>&#x200B;</li>
+</ul>
+<h4 id="&#x5B9A;&#x7406;1"><a href="#&#x5B9A;&#x7406;1" class="headerlink" title="&#x5B9A;&#x7406;1"></a>&#x5B9A;&#x7406;1</h4><p>$T:V_1\rightarrow V_2$&#xFF0C;&#x5219;&#xFF1A;</p>
+<ul>
+<li>$T(\theta<em>{V_1}) = \theta</em>{V_2}, T(-\alpha) = -T(\alpha)$</li>
+<li>$\alpha_1,\alpha_2,&#x2026;,\alpha_n$&#x76F8;&#x5173;&#xFF0C;&#x90A3;&#x4E48;$T\alpha_1,T\alpha_2,&#x2026;,T\alpha_n$&#x4E5F;&#x76F8;&#x5173;&#xFF08;&#x6CE8;&#x610F;&#xFF1A;$\alpha_i$&#x7EC4;&#x7684;&#x65E0;&#x5173;&#x63A8;&#x4E0D;&#x51FA;$T\alpha_i$&#x7684;&#x65E0;&#x5173;&#xFF09;</li>
+<li>$dim R(T)\leq dim V_1$&#xFF0C;&#x6EE1;&#x5C04;&#x65F6;&#x76F8;&#x7B49;</li>
+</ul>
+<h4 id="&#x5B9A;&#x4E49;2&#xFF1A;&#x6620;&#x5C04;&#x7684;&#x590D;&#x5408;"><a href="#&#x5B9A;&#x4E49;2&#xFF1A;&#x6620;&#x5C04;&#x7684;&#x590D;&#x5408;" class="headerlink" title="&#x5B9A;&#x4E49;2&#xFF1A;&#x6620;&#x5C04;&#x7684;&#x590D;&#x5408;"></a>&#x5B9A;&#x4E49;2&#xFF1A;&#x6620;&#x5C04;&#x7684;&#x590D;&#x5408;</h4><p>&#x6709;$T_1:V_1\rightarrow V_2$&#x548C;$T_2:V_2\rightarrow V_3$&#xFF0C;&#x90A3;&#x4E48;&#x6709;$T_2T_1: T_2T_1(x) = T_2(T_1(x))$&#x3002;&#x663E;&#x7136;$T_2T_1$&#x662F;$T_1$&#x548C;$T_2$&#x7684;&#x590D;&#x5408;&#x3002;</p>
+<h4 id="&#x5B9A;&#x7406;2"><a href="#&#x5B9A;&#x7406;2" class="headerlink" title="&#x5B9A;&#x7406;2"></a>&#x5B9A;&#x7406;2</h4><p>$W_1,W_2$&#x662F;$V_1$&#x7684;&#x5B50;&#x7A7A;&#x95F4;&#xFF0C;&#x6709;&#xFF1A;</p>
+<ul>
+<li>$T(W_1+W_2)=T(W_1)+T(W_2)$</li>
+<li>$T(W_1\cap W_2)\subset T(W_1)\cap T(W_2)$</li>
+</ul>
+<h5 id="&#x5B9E;&#x4F8B;&#xFF1A;&#x5B9A;&#x7406;2-2"><a href="#&#x5B9E;&#x4F8B;&#xFF1A;&#x5B9A;&#x7406;2-2" class="headerlink" title="&#x5B9E;&#x4F8B;&#xFF1A;&#x5B9A;&#x7406;2.2"></a>&#x5B9E;&#x4F8B;&#xFF1A;&#x5B9A;&#x7406;2.2</h5><p>$A = \begin{pmatrix} 1&amp;0\0&amp;0\end{pmatrix}\in R^{2\times2}, T:y=Ax,\forall x\in R^2,W_1=span\begin{pmatrix}1\0\end{pmatrix},W_2=span\begin{pmatrix}1\1\end{pmatrix}$&#xFF0C;&#x90A3;&#x4E48;&#x6709;&#xFF1A;<br>$W_1\cap W_2 = \begin{pmatrix}0\0\end{pmatrix},T(W_1\cap W_2)=\begin{pmatrix}0\0\end{pmatrix},T(W_1)\cap T(W_2)=W_1$</p>
+<p>&#x5229;&#x7528;&#x51E0;&#x4F55;&#x8BED;&#x8A00;&#x8BF4;&#x660E;&#xFF1A;$A$&#x662F;&#x4EFF;&#x5C04;&#x53D8;&#x6362;&#xFF0C;&#x5C06;$(x,y)$&#x5411;$X$&#x8F74;&#x6295;&#x5F71;&#x4E3A;$(x,0)$&#x3002;$W_1$&#x4E3A;$y=0$&#x7684;&#x4EFB;&#x610F;&#x5411;&#x91CF;&#xFF0C;$W_2$&#x4E3A;$y=x$&#x4E0A;&#x7684;&#x4EFB;&#x610F;&#x5411;&#x91CF;&#xFF0C;&#x663E;&#x7136;$W_1$&#x548C;$W_2$&#x7684;&#x4EA4;&#x70B9;&#x53EA;&#x6709;&#x539F;&#x70B9;&#xFF0C;&#x505A;&#x4E86;&#x4EFF;&#x5C04;&#x53D8;&#x6362;&#x8FD8;&#x662F;&#x5728;&#x96F6;&#x70B9;&#xFF1B;&#x800C;$TW_1$&#x8FD8;&#x662F;&#x7EF4;&#x6301;&#x539F;&#x6837;&#xFF0C;$TW_2$&#x53D8;&#x6210;&#x4E86;$y=0$&#x7684;&#x4EFB;&#x610F;&#x5411;&#x91CF;&#xFF0C;&#x4E24;&#x8005;&#x7684;&#x7A7A;&#x95F4;&#x91CD;&#x5408;&#x4E86;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E5F;&#x95F4;&#x63A5;&#x8BF4;&#x660E;&#x4E86;$\alpha_i$&#x4E0D;&#x76F8;&#x5173;&#xFF0C;$T\alpha_i$&#x4E5F;&#x662F;&#x53EF;&#x80FD;&#x76F8;&#x5173;&#x7684;&#x3002;</p>
+<h1 id="&#x7B2C;&#x4E94;&#x7AE0;"><a href="#&#x7B2C;&#x4E94;&#x7AE0;" class="headerlink" title="&#x7B2C;&#x4E94;&#x7AE0;"></a>&#x7B2C;&#x4E94;&#x7AE0;</h1><h2 id="&#x53D8;&#x6362;&#x603B;&#x7ED3;"><a href="#&#x53D8;&#x6362;&#x603B;&#x7ED3;" class="headerlink" title="&#x53D8;&#x6362;&#x603B;&#x7ED3;"></a>&#x53D8;&#x6362;&#x603B;&#x7ED3;</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>&#x4E09;&#x89D2;&#x53D8;&#x6362;</th>
+<th>&#x6EE1;&#x79E9;&#x53D8;&#x6362;</th>
+<th>UR&#x53D8;&#x6362;</th>
+<th>Jordan&#x53D8;&#x6362;</th>
+<th>&#x8C31;&#x53D8;&#x6362;</th>
+<th>&#x5947;&#x5F02;&#x53D8;&#x6362;</th>
+<th>&#x6781;&#x53D8;&#x6362;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x9002;&#x7528;&#x573A;&#x5408;</td>
+<td>&#x987A;&#x5E8F;&#x4E3B;&#x5B50;&#x5F0F;&#x975E;&#x96F6;</td>
+<td>&#x4EFB;&#x610F;&#x77E9;&#x9635;</td>
+<td>&#x5217;&#x6EE1;&#x79E9;&#xFF08;&#x884C;&#x6EE1;&#x79E9;&#x65F6;&#x6709;LR&#x53D8;&#x6362;&#xFF09;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&#x552F;&#x4E00;&#x6027;</td>
+<td>$A = LU$&#x4E0D;&#x60DF;&#x4E00;</td>
+<td>&#x4E0D;&#x60DF;&#x4E00;</td>
+<td>&#x552F;&#x4E00;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&#x53D8;&#x6362;&#x65B9;&#x6CD5;</td>
+<td>&#x89E3;&#x65B9;&#x7A0B;&#xFF0C;&#x5F85;&#x5B9A;&#x7CFB;&#x6570;&#x6CD5;</td>
+<td>&#x521D;&#x7B49;&#x884C;&#x53D8;&#x6362;</td>
+<td>Schmidt &#x6B63;&#x4EA4;&#x5316;</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="5-1-&#x4E09;&#x89D2;&#x5206;&#x89E3;"><a href="#5-1-&#x4E09;&#x89D2;&#x5206;&#x89E3;" class="headerlink" title="5.1 &#x4E09;&#x89D2;&#x5206;&#x89E3;"></a>5.1 &#x4E09;&#x89D2;&#x5206;&#x89E3;</h3><h4 id="5-1-1-&#x80CC;&#x666F;"><a href="#5-1-1-&#x80CC;&#x666F;" class="headerlink" title="5.1.1 &#x80CC;&#x666F;"></a>5.1.1 &#x80CC;&#x666F;</h4><p>$Ax = b$&#x7684;&#x89E3;&#xFF08;$A$&#x6EE1;&#x79E9;&#xFF09;&#x4E3A;$x = A^{-1}b$&#xFF0C;&#x5728;$A$&#x590D;&#x6742;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x6C42;&#x9006;&#x8FD0;&#x7B97;&#x5F88;&#x590D;&#x6742;&#xFF0C;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x5C06;$A$&#x62C6;&#x5206;&#x6210;&#x4E0A;&#x4E09;&#x89D2;&#x77E9;&#x9635;$L$&#x548C;&#x4E0B;&#x4E09;&#x89D2;&#x77E9;&#x9635;$U$&#x3002;&#x65B9;&#x7A0B;&#x5C31;&#x8F6C;&#x6362;&#x6210;&#x4E86;$LUx=b$&#xFF0C;&#x4E0D;&#x59A8;&#x8BBE;$y = Ux$&#xFF0C;&#x65B9;&#x7A0B;&#x5219;&#x8F6C;&#x6362;&#x4E3A;$Ly = b$&#x3002;&#x4E09;&#x89D2;&#x9635;&#x6709;&#x5982;&#x4E0B;&#x7684;&#x7ED3;&#x6784;&#x7279;&#x5F81;&#xFF08;&#x4EE5;&#x4E09;&#x9636;&#x4E3A;&#x4F8B;&#xFF09;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+U = 
+\begin{pmatrix}
+1 & u_{12} & u_{13}\\
+0 & 1 & u_{23}\\
+0 & 0 & 1
+\end{pmatrix},
+
+L = 
+\begin{pmatrix}
+1 & 0 & 0\\
+l_{21} & 1 & 0\\
+l_{31} & l_{32} & 1
+\end{pmatrix}</script><p>&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;$Ux = b$ &#x548C; $Lx = b $&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x8FED;&#x4EE3;&#x6BD4;&#x8F83;&#x65B9;&#x4FBF;&#x5730;&#x6C42;&#x51FA;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+(U|b) = 
+\begin{pmatrix}
+1 & u_{12} & u_{13} & b_1\\
+0 & 1 & u_{23} & b_2\\
+0 & 0 & 1 & b_3
+\end{pmatrix},
+
+(L|b) = 
+\begin{pmatrix}
+1 & 0 & 0 & b_1\\
+l_{21} & 1 & 0 & b_2\\
+l_{31} & l_{32} & 1 & b_3\\
+\end{pmatrix}</script><p>&#x6240;&#x4EE5;&#x8981;&#x8BBE;&#x6CD5;&#x627E;&#x51FA;$L$&#x548C;$U$&#x3002;</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%9F%A9%E9%98%B5%E8%AE%BA/">矩阵论</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/12/%E8%AF%BE%E7%A8%8B%E7%96%91%E9%9A%BE%E9%97%AE%E7%AD%94%EF%BC%88%E4%B8%80%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">课程疑难问答（一）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/28/Python%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E7%9A%84%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile">Python学习环境的配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
