@@ -231,21 +231,21 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 天前
+                  本文最后更新于：4 天前
                 
               </p>
             
             <div class="markdown-body">
               <h1 id="&#x524D;&#x8A00;"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</h1><p>&#x6B64;&#x535A;&#x6587;&#x4E13;&#x95E8;&#x7528;&#x6765;&#x6D4B;&#x8BD5;&#x535A;&#x5BA2;&#x7684;&#x529F;&#x80FD;&#x3002;<a id="more"></a></p>
 <h1 id="Latex&#x516C;&#x5F0F;&#x663E;&#x793A;"><a href="#Latex&#x516C;&#x5F0F;&#x663E;&#x793A;" class="headerlink" title="Latex&#x516C;&#x5F0F;&#x663E;&#x793A;"></a>Latex&#x516C;&#x5F0F;&#x663E;&#x793A;</h1><h2 id="&#x884C;&#x5185;&#x516C;&#x5F0F;"><a href="#&#x884C;&#x5185;&#x516C;&#x5F0F;" class="headerlink" title="&#x884C;&#x5185;&#x516C;&#x5F0F;"></a>&#x884C;&#x5185;&#x516C;&#x5F0F;</h2><p>We assume that $\forall x^1_1, x^1_2,&#x2026;, x^1_n \in R,\sum x^1_i$</p>
-<p>$x^1<em>1, x^1_2, &#x2026;, x^1_n  R, sum</em>{x^1_i \in chi} x^1_i$</p>
+<p>$x^1_1, x^1_2, &#x2026;, x^1_n  R, sum_{x^1_i \in chi} x^1_i$</p>
 <p>$\int_1^2 x(t)dt$</p>
 <p>$\sum_{x^1_i \in \chi}$</p>
 <p>$s^ss_2 \ne 22\forall xxx$</p>
 <p>$\forall x^1_1, x^1_2,&#x2026;, x^1_n \in R,\sum x^1_i$</p>
 <p>$s^ss_2 \ne 22\forall xxx, \forall x1^1$</p>
 <p>$K\overset{test}{=} 222$</p>
-<p>$\forall x<em>i \in R,\sum</em>{x_i S\in R} x_i e^{j\omega}$</p>
+<p>$\forall x_i \in R,\sum_{x_i S\in R} x_i e^{j\omega}$</p>
 <p>$\forall x_i \in R,$</p>
 <p>$\sum_{x_i S\in R} x_i e^{j\omega}$</p>
 <p>xxxxxcsdcs</p>
@@ -461,45 +461,6 @@ f\left(
 
 
 
-
-  
-
-  
-    <!-- MathJax -->
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        options: {
-          renderActions: {
-            findScript: [10, doc => {
-              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                const display = !!node.type.match(/; *mode=display/);
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                const text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = { node: text, delim: '', n: 0 };
-                math.end = { node: text, delim: '', n: 0 };
-                doc.math.push(math);
-              });
-            }, '', false],
-            insertedScript: [200, () => {
-              document.querySelectorAll('mjx-container').forEach(node => {
-                let target = node.parentNode;
-                if (target.nodeName.toLowerCase() === 'li') {
-                  target.parentNode.classList.add('has-jax');
-                }
-              });
-            }, '', false]
-          }
-        }
-      };
-    </script>
-
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
-
-  
 
 
 
